@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Function;
 
 @Component
@@ -24,6 +26,10 @@ public class JwtUtils {
 
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
+    }
+
+    public List<String> extractRoles(String token) {
+        return (List<String>) extractClaim(token, claims -> claims.get("roles", Collection.class));
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

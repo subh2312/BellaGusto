@@ -1,3 +1,11 @@
 
+j
+java:S1192"MDefine a constant instead of duplicating this literal "/auth/logout" 3 times.(ä¢³Ğ8æù Üİ1
 w
-java:S1104"UMake isSecured a static final constant or non-public and provide accessors if needed.(°íšüÿÿÿÿ8æÆ›Ñİ1
+java:S1104"UMake isSecured a static final constant or non-public and provide accessors if needed.(°íšüÿÿÿÿ8ÊñÛİ1
+y
+java:S1104 "\Make isSecuredForUser a static final constant or non-public and provide accessors if needed.(ê‚Ã®8ÊñÛİ1
+
+java:S1104$"]Make isSecuredForAdmin a static final constant or non-public and provide accessors if needed.(Ã¹óÓıÿÿÿÿ8¼»ñÛİ1
+
+java:S1104("]Make isSecuredForOwner a static final constant or non-public and provide accessors if needed.(ëµõıÿÿÿÿ8û¥øÛİ1

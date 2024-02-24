@@ -10,7 +10,7 @@ import org.subhankar.user.model.DTO.Result;
 
 import java.util.List;
 
-@FeignClient(name = "ADDRESS-SERVICE")
+@FeignClient(name = "ADDRESS-SERVICE", url = "http://localhost:9093")
 public interface AddressIntegration {
     @PostMapping("/address")
     Result createAddress(@RequestBody Address address);

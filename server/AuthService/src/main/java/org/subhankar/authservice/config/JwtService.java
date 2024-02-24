@@ -57,9 +57,6 @@ public class JwtService {
 
 
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
-    }
 
     public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
         return Jwts
@@ -71,21 +68,6 @@ public class JwtService {
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
-
-
-
-    private String createToken(Map<String, Object> claims, String username) {
-
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + 3600);
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(username)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(expiryDate)
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
-    }
-
 
     private Key getSignKey() {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);

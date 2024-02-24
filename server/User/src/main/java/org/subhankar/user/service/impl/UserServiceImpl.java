@@ -206,7 +206,7 @@ public class UserServiceImpl implements UserService {
     public User getUserByEmail(String email) {
         Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isEmpty()){
-            return null;
+            throw new RuntimeException("User not found!!");
         }
         return userOptional.get();
     }

@@ -29,6 +29,7 @@ import org.subhankar.authservice.model.DO.User;
 import org.subhankar.authservice.model.DTO.*;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -52,7 +53,11 @@ public class AuthController {
             Result Result=null;
             if(authentication.isAuthenticated()){
                 User user = userIntegration.getUserByEmail(FetchUserDTO.builder().email(loginRequestDTO.getEmail()).build());
-                String accessToken = jwtProvider.generateToken(user);
+                Map<String, Object> claims = new HashMap<>();
+                claims.put("name", user.getName());
+                claims.put("roles", user.getRoles().stream().map(Role::getName).toList());
+                claims.put("id", user.getId());
+                String accessToken = jwtProvider.generateToken(claims,user);
                 Cookie cookie = new Cookie("token", accessToken);
                 cookie.setMaxAge(3600);
                 cookie.setSecure(true);

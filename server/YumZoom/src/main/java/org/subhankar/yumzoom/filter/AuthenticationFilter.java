@@ -1,5 +1,6 @@
 package org.subhankar.yumzoom.filter;
 
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -28,17 +30,27 @@ public class AuthenticationFilter implements GatewayFilter {
                 return onError(exchange);
             }
             final String token = extractToken(request);
-            if (!jwtUtils.isTokenExpired(token)) {
+            if (Boolean.FALSE.equals(jwtUtils.isTokenExpired(token))) {
+                if(!request.getURI().getPath().contains("/auth/logout")){
+                    if (routeValidator.isSecuredForUser.test(request) && !hasRole(token, "User")) {
+                        return onError(exchange);
+                    } else if (routeValidator.isSecuredForAdmin.test(request) && !hasRole(token, "Admin")) {
+                        return onError(exchange);
+                    }else if (routeValidator.isSecuredForOwner.test(request) && !hasRole(token, "Owner")) {
+                        return onError(exchange);
+                    }
+                }   
                 return chain.filter(exchange);
             } else {
                 return onError(exchange);
             }
         }
-        return null;
+
+        return chain.filter(exchange);
     }
 
     private String extractToken(ServerHttpRequest request) {
-        return Objects.requireNonNull(request.getCookies().getFirst("accessToken")).getValue();
+        return Objects.requireNonNull(request.getCookies().getFirst("token")).getValue();
 
     }
 
@@ -48,6 +60,22 @@ public class AuthenticationFilter implements GatewayFilter {
         return response.setComplete();
     }
     private boolean authMissing(ServerHttpRequest request) {
-        return !request.getHeaders().containsKey("Authorization");
+        return !request.getCookies().containsKey("token");
+    }
+
+    private boolean hasRole(String token, String role) {
+        List<String> roles = jwtUtils.extractRoles(token);
+        System.out.println(roles);
+
+        boolean flag = false;
+        for (String r : roles) {
+            System.out.println(r + ">>" + role);
+            if (r.equals(role)) {
+                flag = true;
+                break;
+            }
+        }
+        System.out.println(flag);
+        return flag;
     }
 }
