@@ -1,0 +1,10 @@
+.avatar-container {
+  position: relative;
+  margin-bottom: -50px;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 75px; /* Adjust this value based on your desired position */
+  left: 200px; /* Adjust this value based on your desired position */
+}

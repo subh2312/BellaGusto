@@ -1,0 +1,32 @@
+
+r	java:S1174"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œæ°‚þÿÿÿÿ8â•‰ÑÝ1
+R
+java:S2209?"5Change this instance-reference to a static reference.(Õ‘ê—8––‰ÑÝ1
+L	java:S106M"+Replace this use of System.out by a logger.(˜™—Þúÿÿÿÿ8—–‰ÑÝ1
+L	java:S106Q"+Replace this use of System.out by a logger.(ÐÚùÃùÿÿÿÿ8—–‰ÑÝ1
+W	java:S125U"<This block of commented-out lines of code should be removed.(©¸|8˜–‰ÑÝ1
+K
+java:S1481h".Remove this unused "userEmail" local variable.(èÎúÚ8š–‰ÑÝ1
+N
+java:S1128"1Remove this unused import 'io.jsonwebtoken.Jwts'.(íðœ±8È‹¼ÑÝ1
+[
+java:S1128"?Remove this unused import 'io.jsonwebtoken.SignatureAlgorithm'.(ç±«g8È‹¼ÑÝ1
+\
+java:S1128":Remove this unused import 'io.jsonwebtoken.security.Keys'.(û±ÃŸúÿÿÿÿ8È‹¼ÑÝ1
+l
+java:S1128
+"ORemove this unused import 'org.springframework.beans.factory.annotation.Value'.(ìø›8È‹¼ÑÝ1
+f
+java:S1128"DRemove this unused import 'org.springframework.http.ResponseCookie'.(žçµùÿÿÿÿ8È‹¼ÑÝ1
+€
+java:S1128"^Remove this unused import 'org.springframework.security.authentication.AuthenticationManager'.(ðŽþ–þÿÿÿÿ8È‹¼ÑÝ1
+p
+java:S1128"NRemove this unused import 'org.springframework.security.crypto.bcrypt.BCrypt'.(¨úì®ÿÿÿÿÿ8È‹¼ÑÝ1
+H
+java:S1128"+Remove this unused import 'java.util.Date'.(¸…¼ü8È‹¼ÑÝ1
+L
+java:S1128 "*Remove this unused import 'java.util.Map'.(¼è½Òþÿÿÿÿ8É‹¼ÑÝ1
+e
+java:S1128""CRemove this unused import 'java.util.concurrent.ConcurrentHashMap'.(ÓŠÓøúÿÿÿÿ8É‹¼ÑÝ1
+]
+java:S1128$";Remove this unused import 'javax.crypto.Cipher.SECRET_KEY'.(ÈºÁßùÿÿÿÿ8É‹¼ÑÝ1

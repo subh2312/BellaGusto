@@ -1,0 +1,60 @@
+server:
+  port: 9091
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:9090/eureka/
+
+
+spring:
+  application:
+    name: YumZoom
+#  cloud:
+#    gateway:
+#      mvc:
+#        routes:
+#          - id: USER-SERVICE
+#            uri: lb://USER-SERVICE
+#            predicates:
+#              - Path=/user/**
+#          - id: RESTAURANT-SERVICE
+#            uri: lb://RESTAURANT-SERVICE
+#            predicates:
+#              - Path=/restaurant/**
+#          - id: ORDER-SERVICE
+#            uri: lb://ORDER-SERVICE
+#            predicates:
+#              - Path=/order/**
+#          - id: PAYMENT-SERVICE
+#            uri: lb://PAYMENT-SERVICE
+#            predicates:
+#              - Path=/payment/**
+#          - id: DELIVERY-SERVICE
+#            uri: lb://DELIVERY-SERVICE
+#            predicates:
+#              - Path=/delivery/**
+#          - id: RATING-SERVICE
+#            uri: lb://RATING-SERVICE
+#            predicates:
+#              - Path=/rating/**
+#          - id: MENU-SERVICE
+#            uri: lb://MENU-SERVICE
+#            predicates:
+#              - Path=/menu/**
+#          - id: ADDRESS-SERVICE
+#            uri: lb://ADDRESS-SERVICE
+#            predicates:
+#              - Path=/address/**
+#          - id: AUTH-SERVICE
+#            uri: lb://AUTH-SERVICE
+#            predicates:
+#              - Path=/auth/**
+
+jwt:
+  secret: "902ffc52f4ab670361e543008a5f8e86005edadfbc1df36f5cc375b433448aff"
+  expirationMs: 86400000
