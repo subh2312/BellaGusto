@@ -1,8 +1,12 @@
 package org.subhankar.user.model.DO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.subhankar.user.config.AppConfig;
+import org.subhankar.user.config.ApplicationContextProvider;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,4 +39,13 @@ import java.util.Set;
 
         @Transient
         List<String> addressList = new ArrayList<>();
+
+        @PrePersist
+        @PreUpdate
+        public void prePersist() {
+            this.salt = BCrypt.gensalt();
+            AppConfig config = ApplicationContextProvider.getApplicationContext().getBean(AppConfig.class);
+            this.password = BCrypt.hashpw(this.password+config.getPepper(), this.salt);
+        }
+
     }

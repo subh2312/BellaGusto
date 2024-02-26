@@ -39,7 +39,7 @@ public class AuthenticationFilter implements GatewayFilter {
                     }else if (routeValidator.isSecuredForOwner.test(request) && !hasRole(token, "Owner")) {
                         return onError(exchange);
                     }
-                }   
+                }
                 return chain.filter(exchange);
             } else {
                 return onError(exchange);
@@ -69,13 +69,11 @@ public class AuthenticationFilter implements GatewayFilter {
 
         boolean flag = false;
         for (String r : roles) {
-            System.out.println(r + ">>" + role);
             if (r.equals(role)) {
                 flag = true;
                 break;
             }
         }
-        System.out.println(flag);
         return flag;
     }
 }

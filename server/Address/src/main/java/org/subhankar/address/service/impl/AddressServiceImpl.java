@@ -1,7 +1,9 @@
 package org.subhankar.address.service.impl;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.subhankar.address.config.JwtUtil;
 import org.subhankar.address.exception.ResourceNotFoundException;
 import org.subhankar.address.model.DO.Address;
 import org.subhankar.address.model.DTO.Result;
@@ -16,16 +18,28 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
 
+    private final JwtUtil jwtUtil;
     private final AddressRepository addressRepository;
 
     @Override
-    public Result getAddress(String id) {
+    public Result getAddress(String id, HttpServletRequest request) {
+        String token = request.getCookies()[0].getValue();
+        String userId = jwtUtil.getIdFromToken(token);
         Optional<Address> optionalAddress = addressRepository.findById(id);
         if (optionalAddress.isEmpty()){
             throw new ResourceNotFoundException("Address", "id", id);
         }
 
         Address address = optionalAddress.get();
+        if(!jwtUtil.hasRole(token,"Admin")) {
+            if (!address.getIdentifier().equals(userId)) {
+                return Result.builder()
+                        .code("FDAAS-0002")
+                        .message("Address not found")
+                        .data(null)
+                        .build();
+            }
+        }
         return Result.builder()
                 .code("FDAAS-0001")
                 .message("Address found")
@@ -34,13 +48,17 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAddressByCity(String city) {
+    public Result getAddressByCity(String city, HttpServletRequest request) {
+        String token = request.getCookies()[0].getValue();
+        String userId = jwtUtil.getIdFromToken(token);
         List<Address> address = addressRepository.findByCity(city);
+        if(!jwtUtil.hasRole(token,"Admin")) {
+            address.removeIf(a -> !a.getIdentifier().equals(userId));
+        }
         if (address.isEmpty()){
             throw new ResourceNotFoundException("Address", "city", city);
         }
 
-
         return Result.builder()
                 .code("FDAAS-0001")
                 .message("Address found")
@@ -49,8 +67,13 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAddressByState(String state) {
+    public Result getAddressByState(String state, HttpServletRequest request) {
+        String token = request.getCookies()[0].getValue();
+        String userId = jwtUtil.getIdFromToken(token);
         List<Address> addresses = addressRepository.findByState(state);
+        if(!jwtUtil.hasRole(token,"Admin")) {
+            addresses.removeIf(a -> !a.getIdentifier().equals(userId));
+        }
         if (addresses.isEmpty()){
             throw new ResourceNotFoundException("Address", "state", state);
         }
@@ -63,8 +86,13 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAddressByCountry(String country) {
+    public Result getAddressByCountry(String country, HttpServletRequest request) {
+        String token = request.getCookies()[0].getValue();
+        String userId = jwtUtil.getIdFromToken(token);
         List<Address> addresses = addressRepository.findByCountry(country);
+        if(!jwtUtil.hasRole(token,"Admin")) {
+            addresses.removeIf(a -> !a.getIdentifier().equals(userId));
+        }
         if (addresses.isEmpty()){
             throw new ResourceNotFoundException("Address", "country", country);
         }
@@ -78,8 +106,17 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAddressByZipCode(String zipCode) {
+    public Result getAddressByZipCode(String zipCode, HttpServletRequest request) {
+
+
         List<Address> addresses = addressRepository.findByZipCode(zipCode);
+        String token = request.getCookies()[0].getValue();
+        String userId = jwtUtil.getIdFromToken(token);
+
+        if(!jwtUtil.hasRole(token,"Admin")){
+            addresses.removeIf(a -> !a.getIdentifier().equals(userId));
+        }
+
         if (addresses.isEmpty()){
             throw new ResourceNotFoundException("Address", "zipCode", zipCode);
         }
@@ -92,22 +129,42 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result createAddress(Address address) {
-        Address savedAddress = addressRepository.save(address);
+    public Result createAddress(Address address, HttpServletRequest request) {
+        Address newAddress = Address.builder()
+                .addressLine1(address.getAddressLine1())
+                .addressLine2(address.getAddressLine2())
+                .city(address.getCity())
+                .state(address.getState())
+                .country(address.getCountry())
+                .zipCode(address.getZipCode())
+                .tag(address.getTag())
+                .identifier(jwtUtil.getIdFromToken(request.getCookies()[0].getValue()))
+                .build();
         return Result.builder()
                 .code("FDAAS-0001")
                 .message("Address created")
-                .data(savedAddress)
+                .data(addressRepository.save(newAddress))
                 .build();
     }
 
     @Override
-    public Result updateAddress(String id, Address address) {
+    public Result updateAddress(String id, Address address, HttpServletRequest request) {
+
         Optional<Address> optionalAddress = addressRepository.findById(id);
         if (optionalAddress.isEmpty()){
             throw new ResourceNotFoundException("Address", "id", id);
         }
-
+        String token = request.getCookies()[0].getValue();
+        String userId = jwtUtil.getIdFromToken(token);
+        if(!jwtUtil.hasRole(token,"Admin")) {
+            if (!optionalAddress.get().getIdentifier().equals(userId)) {
+                return Result.builder()
+                        .code("FDAAS-0002")
+                        .message("Address not found")
+                        .data(null)
+                        .build();
+            }
+        }
         Address oldAddress = optionalAddress.get();
         updatePropertyIfNotEmpty(address.getAddressLine1(), oldAddress::setAddressLine1);
         updatePropertyIfNotEmpty(address.getAddressLine2(), oldAddress::setAddressLine2);
@@ -115,8 +172,8 @@ public class AddressServiceImpl implements AddressService {
         updatePropertyIfNotEmpty(address.getState(), oldAddress::setState);
         updatePropertyIfNotEmpty(address.getCountry(), oldAddress::setCountry);
         updatePropertyIfNotEmpty(address.getZipCode(), oldAddress::setZipCode);
-        updatePropertyIfNotEmpty(address.getIdentifier(), oldAddress::setIdentifier);
-
+        updatePropertyIfNotEmpty(userId, oldAddress::setIdentifier);
+        updatePropertyIfNotEmpty(address.getTag(), oldAddress::setTag);
         addressRepository.save(oldAddress);
         return Result.builder()
                 .code("FDAAS-0001")
@@ -126,12 +183,22 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result deleteAddress(String id) {
+    public Result deleteAddress(String id, HttpServletRequest request) {
         Optional<Address> optionalAddress = addressRepository.findById(id);
         if (optionalAddress.isEmpty()){
             throw new ResourceNotFoundException("Address", "id", id);
         }
-
+        String token = request.getCookies()[0].getValue();
+        String userId = jwtUtil.getIdFromToken(token);
+        if(!jwtUtil.hasRole(token,"Admin")) {
+            if (!optionalAddress.get().getIdentifier().equals(userId)) {
+                return Result.builder()
+                        .code("FDAAS-0002")
+                        .message("Address not found")
+                        .data(null)
+                        .build();
+            }
+        }
         addressRepository.deleteById(id);
 
         return Result.builder()
@@ -142,11 +209,18 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAllAddress() {
+    public Result getAllAddress(HttpServletRequest request) {
+        String token = request.getCookies()[0].getValue();
+        String userId = jwtUtil.getIdFromToken(token);
+        List<Address> addresses = addressRepository.findAll();
+        if(!jwtUtil.hasRole(token,"Admin")) {
+            addresses.removeIf(a -> !a.getIdentifier().equals(userId));
+        }
+
         return Result.builder()
                 .code("FDAAS-0001")
                 .message("Address found")
-                .data(addressRepository.findAll())
+                .data(addresses)
                 .build();
     }
 

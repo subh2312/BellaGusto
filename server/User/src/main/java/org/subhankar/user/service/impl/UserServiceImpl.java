@@ -1,13 +1,17 @@
 package org.subhankar.user.service.impl;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.subhankar.user.config.JwtUtil;
 import org.subhankar.user.exception.ResourceNotFoundException;
 import org.subhankar.user.integration.AddressIntegration;
 import org.subhankar.user.model.DO.Address;
@@ -28,27 +32,24 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Value("${application.pepper}")
-    private String pepper;
 
+    private final JwtUtil jwtUtils;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final AddressIntegration addressIntegration;
 
     @Override
     public Result createUser(CreateUserRequestDTO userDTO) {
-        Role role = roleRepository.findById(userDTO.getRoleId()).orElseThrow(() -> new ResourceNotFoundException("Role","id", userDTO.getRoleId()));
-        String salt = BCrypt.gensalt();
-        String password = BCrypt.hashpw(userDTO.getPassword() + pepper, salt);
+        Role role = roleRepository.findByName(userDTO.getRole()).orElseThrow(() -> new ResourceNotFoundException("Role","name", userDTO.getRole()));
+
         User user = userRepository.save(User
                 .builder()
                 .name(userDTO.getName())
                 .email(userDTO.getEmail())
-                .password(password)
+                .password(userDTO.getPassword())
                 .phone(userDTO.getPhone())
                 .gender(userDTO.getGender())
                 .dob(userDTO.getDob())
-                .salt(salt)
                 .roles(Set.of(role))
                 .build());
         roleRepository.save(role);
@@ -70,7 +71,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result updateUser(String id, CreateUserRequestDTO userDTO) {
+    public Result updateUser(CreateUserRequestDTO userDTO,HttpServletRequest request) {
+        String id=jwtUtils.getIdFromToken(request.getCookies()[0].getValue());
+
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             throw new ResourceNotFoundException("User","id", id);
@@ -81,7 +84,7 @@ public class UserServiceImpl implements UserService {
         updatePropertyIfNotEmpty(userDTO.getGender(), existingUser::setGender);
         updatePropertyIfNotEmpty(userDTO.getPhone(), existingUser::setPhone);
         updatePropertyIfNotEmpty(userDTO.getDob(), existingUser::setDob);
-
+        updatePropertyIfNotEmpty(userDTO.getPassword(), existingUser::setPassword);
         userRepository.save(existingUser);
         return Result
                 .builder()
@@ -92,12 +95,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result deleteUser(String id) {
+    public Result deleteUser(HttpServletRequest request, HttpServletResponse response) {
+        String id=jwtUtils.getIdFromToken(request.getCookies()[0].getValue());
+
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             throw new ResourceNotFoundException("User","id", id);
         }
         userRepository.deleteById(id);
+        response.setHeader(HttpHeaders.SET_COOKIE, "token=; Max-Age=0; Path=/; HttpOnly; SameSite=None; Secure");
         return Result.builder()
                 .code("FDAS-003")
                 .message("User deleted successfully")
@@ -106,7 +112,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result getUser(String id) {
+    public Result getUser(HttpServletRequest request) {
+        String id=jwtUtils.getIdFromToken(request.getCookies()[0].getValue());
+        System.out.println("id: "+id);
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             throw new ResourceNotFoundException("User","id", id);
@@ -173,34 +181,7 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
-    @Override
-    public Result addAddress(Address address) {
-        Optional<User> optional = userRepository.findById(address.getIdentifier());
-        if (optional.isEmpty()){
-            throw new ResourceNotFoundException("User", "id", address.getIdentifier());
-        }
-        Address userAddress = Address
-                .builder()
-                .addressLine1(address.getAddressLine1())
-                .addressLine2(address.getAddressLine2())
-                .city(address.getCity())
-                .state(address.getState())
-                .country(address.getCountry())
-                .zipCode(address.getZipCode())
-                .identifier(address.getIdentifier())
-                .tag(address.getTag())
-                .build();
-        Result addressResult = addressIntegration.createAddress(userAddress);
-        HashMap<String, String> addressData = (HashMap<String, String>) addressResult.getData();
-        String addressId = addressData.get("id");
-        User user = optional.get();
-        user.setAddressList(List.of(addressId));
-        return Result.builder()
-                .code("FDAAS-0001")
-                .message("Restaurant found")
-                .data(userRepository.save(user))
-                .build();
-    }
+
 
     @Override
     public User getUserByEmail(String email) {
@@ -210,7 +191,6 @@ public class UserServiceImpl implements UserService {
         }
         return userOptional.get();
     }
-
 
     private static void updatePropertyIfNotEmpty(String newValue, Consumer<String> setter) {
         if (newValue != null && !newValue.isEmpty()) {

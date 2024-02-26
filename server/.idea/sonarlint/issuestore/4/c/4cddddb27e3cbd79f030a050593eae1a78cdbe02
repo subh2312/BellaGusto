@@ -1,12 +1,10 @@
 
 t
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(‹ËÃóÿÿÿÿÿ8Ï¤¡İİ1
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(‹ËÃóÿÿÿÿÿ8äÜÎ¦Ş1
 n
-java:S1871'"LThis branch's code block is the same as the block for the branch on line 35.(ÒÑĞ¦üÿÿÿÿ8Ò¤¡İİ1
+java:S1871'"LThis branch's code block is the same as the block for the branch on line 35.(ÒÑĞ¦üÿÿÿÿ8çÜÎ¦Ş1
 n
-java:S1871%"LThis branch's code block is the same as the block for the branch on line 35.(Ò‡öªøÿÿÿÿ8Ò¤¡İİ1
-L	java:S106D"+Replace this use of System.out by a logger.(ïÚïşÿÿÿÿ8›½ İİ1
-G	java:S106H"+Replace this use of System.out by a logger.(İòˆ8œ½ İİ1
-G	java:S106N"+Replace this use of System.out by a logger.(Ò‰»8œ½ İİ1
+java:S1871%"LThis branch's code block is the same as the block for the branch on line 35.(Ò‡öªøÿÿÿÿ8çÜÎ¦Ş1
+L	java:S106D"+Replace this use of System.out by a logger.(ïÚïşÿÿÿÿ8ëÜÎ¦Ş1
 U
-java:S1128"3Remove this unused import 'io.jsonwebtoken.Claims'.(“œ¾ úÿÿÿÿ8ô İİ1
+java:S1128"3Remove this unused import 'io.jsonwebtoken.Claims'.(“œ¾ úÿÿÿÿ8ìÜÎ¦Ş1

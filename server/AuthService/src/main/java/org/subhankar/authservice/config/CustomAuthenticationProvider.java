@@ -32,7 +32,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             return null;
         }
         String salt = user.getSalt();
-        String pepper = "F00|)--|)3L!V3RY";
+        String pepper = "ymZm9092";
         String hashedPass = BCrypt.hashpw(password + pepper, salt);
         if (!hashedPass.equals(user.getPassword())) {
             System.out.println("Password is incorrect");

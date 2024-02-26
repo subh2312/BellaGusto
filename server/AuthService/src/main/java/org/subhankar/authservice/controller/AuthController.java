@@ -28,10 +28,7 @@ import org.subhankar.authservice.model.DO.Role;
 import org.subhankar.authservice.model.DO.User;
 import org.subhankar.authservice.model.DTO.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static javax.crypto.Cipher.SECRET_KEY;
@@ -92,13 +89,17 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Result> register(@RequestBody User userDO) {
-        User user = User.builder()
+    public ResponseEntity<Result> register(@RequestBody CreateUserDTO userDO, HttpServletResponse response) {
+        CreateUserDTO user = CreateUserDTO.builder()
                 .name(userDO.getName())
-                .roles(Set.of(Role.builder().name("USER").build()))
                 .email(userDO.getEmail())
-                .password(passwordEncoder.encode(userDO.getPassword()))
+                .password(userDO.getPassword())
+                .phone(userDO.getPhone())
+                .dob(userDO.getDob())
+                .role(userDO.getRole())
+                .gender(userDO.getGender())
                 .build();
+
         Result result = userIntegration.addUser(user);
 
         return new ResponseEntity<>(result, HttpStatus.CREATED);
@@ -129,12 +130,6 @@ public class AuthController {
                 .message("User logged out successfully")
                 .build();
         return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-
-    @PostMapping("/validate")
-    public boolean validate(@PathVariable String token) {
-        return jwtProvider.isTokenExpired(token);
     }
 
 }

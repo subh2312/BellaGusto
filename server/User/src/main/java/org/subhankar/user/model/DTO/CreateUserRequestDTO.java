@@ -13,6 +13,6 @@ public class CreateUserRequestDTO {
     private String password;
     private String gender;
     private String dob;
-    private String roleId;
+    private String role;
 
 }

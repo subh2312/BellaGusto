@@ -11,15 +11,14 @@ public class RouteValidator {
     private static final List<String> openApiEndpoints = List.of(
             "/auth/login",
             "/auth/register",
-            "/auth/validate",
-            "/user/email");
+            "/user/new");
 
     private static final List<String> userApiEndpoints = List.of(
             "/auth/logout");
 
     private static final List<String> adminApiEndpoints = List.of(
-            "/user",
-            "/auth/logout");
+            "/auth/logout",
+            "/role/change");
 
     private static final List<String> ownerApiEndpoints = List.of(
             "/auth/logout"
