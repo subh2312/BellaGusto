@@ -22,7 +22,7 @@ public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
 
     @Override
-    public Result getAddress(String id, HttpServletRequest request) {
+    public Result getAddress(String id,String type, HttpServletRequest request) {
         String token = request.getCookies()[0].getValue();
         String userId = jwtUtil.getIdFromToken(token);
         Optional<Address> optionalAddress = addressRepository.findById(id);
@@ -32,7 +32,8 @@ public class AddressServiceImpl implements AddressService {
 
         Address address = optionalAddress.get();
         if(!jwtUtil.hasRole(token,"Admin")) {
-            if (!address.getIdentifier().equals(userId)) {
+            //when fetching an address belonging to different user
+            if (!address.getIdentifier().equals(userId)&&type.equals("user")) {
                 return Result.builder()
                         .code("FDAAS-0002")
                         .message("Address not found")
@@ -48,11 +49,11 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAddressByCity(String city, HttpServletRequest request) {
+    public Result getAddressByCity(String city,String type, HttpServletRequest request) {
         String token = request.getCookies()[0].getValue();
         String userId = jwtUtil.getIdFromToken(token);
         List<Address> address = addressRepository.findByCity(city);
-        if(!jwtUtil.hasRole(token,"Admin")) {
+        if(!jwtUtil.hasRole(token,"Admin")&&type.equals("user")) {
             address.removeIf(a -> !a.getIdentifier().equals(userId));
         }
         if (address.isEmpty()){
@@ -67,11 +68,11 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAddressByState(String state, HttpServletRequest request) {
+    public Result getAddressByState(String state,String type, HttpServletRequest request) {
         String token = request.getCookies()[0].getValue();
         String userId = jwtUtil.getIdFromToken(token);
         List<Address> addresses = addressRepository.findByState(state);
-        if(!jwtUtil.hasRole(token,"Admin")) {
+        if(!jwtUtil.hasRole(token,"Admin") && type.equals("user")) {
             addresses.removeIf(a -> !a.getIdentifier().equals(userId));
         }
         if (addresses.isEmpty()){
@@ -86,11 +87,11 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAddressByCountry(String country, HttpServletRequest request) {
+    public Result getAddressByCountry(String country,String type, HttpServletRequest request) {
         String token = request.getCookies()[0].getValue();
         String userId = jwtUtil.getIdFromToken(token);
         List<Address> addresses = addressRepository.findByCountry(country);
-        if(!jwtUtil.hasRole(token,"Admin")) {
+        if(!jwtUtil.hasRole(token,"Admin") && type.equals("user")) {
             addresses.removeIf(a -> !a.getIdentifier().equals(userId));
         }
         if (addresses.isEmpty()){
@@ -106,14 +107,14 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAddressByZipCode(String zipCode, HttpServletRequest request) {
+    public Result getAddressByZipCode(String zipCode,String type, HttpServletRequest request) {
 
 
         List<Address> addresses = addressRepository.findByZipCode(zipCode);
         String token = request.getCookies()[0].getValue();
         String userId = jwtUtil.getIdFromToken(token);
 
-        if(!jwtUtil.hasRole(token,"Admin")){
+        if(!jwtUtil.hasRole(token,"Admin") && type.equals("user")){
             addresses.removeIf(a -> !a.getIdentifier().equals(userId));
         }
 
@@ -148,7 +149,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result updateAddress(String id, Address address, HttpServletRequest request) {
+    public Result updateAddress(String id,String type, Address address, HttpServletRequest request) {
 
         Optional<Address> optionalAddress = addressRepository.findById(id);
         if (optionalAddress.isEmpty()){
@@ -157,13 +158,30 @@ public class AddressServiceImpl implements AddressService {
         String token = request.getCookies()[0].getValue();
         String userId = jwtUtil.getIdFromToken(token);
         if(!jwtUtil.hasRole(token,"Admin")) {
-            if (!optionalAddress.get().getIdentifier().equals(userId)) {
+            if (!optionalAddress.get().getIdentifier().equals(userId) && type.equals("user")) {
                 return Result.builder()
                         .code("FDAAS-0002")
                         .message("Address not found")
                         .data(null)
                         .build();
             }
+//            if(type.equals("restaurant")){
+//                Restaurant restaurant = restaurantIntegration.getById(optionalAddress.get().getIdentifier());
+//                if(restaurant.isEmpty()){
+//                    return Result.builder()
+//                            .code("FDAAS-0002")
+//                            .message("Restaurant not found")
+//                            .data(null)
+//                            .build();
+//                }
+//                if(!restaurant.owner.equals(userId)){
+//                    return Result.builder()
+//                            .code("FDAAS-0002")
+//                            .message("Address not found")
+//                            .data(null)
+//                            .build();
+//                }
+//            }
         }
         Address oldAddress = optionalAddress.get();
         updatePropertyIfNotEmpty(address.getAddressLine1(), oldAddress::setAddressLine1);
@@ -183,7 +201,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result deleteAddress(String id, HttpServletRequest request) {
+    public Result deleteAddress(String id,String type, HttpServletRequest request) {
         Optional<Address> optionalAddress = addressRepository.findById(id);
         if (optionalAddress.isEmpty()){
             throw new ResourceNotFoundException("Address", "id", id);
@@ -191,13 +209,30 @@ public class AddressServiceImpl implements AddressService {
         String token = request.getCookies()[0].getValue();
         String userId = jwtUtil.getIdFromToken(token);
         if(!jwtUtil.hasRole(token,"Admin")) {
-            if (!optionalAddress.get().getIdentifier().equals(userId)) {
+            if (!optionalAddress.get().getIdentifier().equals(userId) && type.equals("user")) {
                 return Result.builder()
                         .code("FDAAS-0002")
                         .message("Address not found")
                         .data(null)
                         .build();
             }
+            //            if(type.equals("restaurant")){
+//                Restaurant restaurant = restaurantIntegration.getById(optionalAddress.get().getIdentifier());
+//                if(restaurant.isEmpty()){
+//                    return Result.builder()
+//                            .code("FDAAS-0002")
+//                            .message("Restaurant not found")
+//                            .data(null)
+//                            .build();
+//                }
+//                if(!restaurant.owner.equals(userId)){
+//                    return Result.builder()
+//                            .code("FDAAS-0002")
+//                            .message("Address not found")
+//                            .data(null)
+//                            .build();
+//                }
+//            }
         }
         addressRepository.deleteById(id);
 
@@ -209,11 +244,11 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Result getAllAddress(HttpServletRequest request) {
+    public Result getAllAddress(String type,HttpServletRequest request) {
         String token = request.getCookies()[0].getValue();
         String userId = jwtUtil.getIdFromToken(token);
         List<Address> addresses = addressRepository.findAll();
-        if(!jwtUtil.hasRole(token,"Admin")) {
+        if(!jwtUtil.hasRole(token,"Admin") && type.equals("user")) {
             addresses.removeIf(a -> !a.getIdentifier().equals(userId));
         }
 

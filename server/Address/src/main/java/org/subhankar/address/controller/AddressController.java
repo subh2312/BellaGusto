@@ -17,28 +17,28 @@ public class AddressController {
     private final AddressService addressService;
 
     @GetMapping("/{id}")
-    public Result getAddress(@PathVariable String id, HttpServletRequest request){
-        return addressService.getAddress(id,request);
+    public Result getAddress(@PathVariable String id,@RequestParam String type, HttpServletRequest request){
+        return addressService.getAddress(id,type,request);
     }
 
     @GetMapping("/city/{city}")
-    public Result getAddressByCity(@PathVariable String city, HttpServletRequest request){
-        return addressService.getAddressByCity(city,request);
+    public Result getAddressByCity(@PathVariable String city,@RequestParam String type, HttpServletRequest request){
+        return addressService.getAddressByCity(city,type,request);
     }
 
     @GetMapping("/state/{state}")
-    public Result getAddressByState(@PathVariable String state, HttpServletRequest request){
-        return addressService.getAddressByState(state,request);
+    public Result getAddressByState(@PathVariable String state,@RequestParam String type, HttpServletRequest request){
+        return addressService.getAddressByState(state,type,request);
     }
 
     @GetMapping("/country/{country}")
-    public Result getAddressByCountry(@PathVariable String country, HttpServletRequest request){
-        return addressService.getAddressByCountry(country,request);
+    public Result getAddressByCountry(@PathVariable String country,@RequestParam String type, HttpServletRequest request){
+        return addressService.getAddressByCountry(country,type,request);
     }
 
     @GetMapping("/zipCode/{zipCode}")
-    public Result getAddressByZipCode(@PathVariable String zipCode,HttpServletRequest request){
-        return addressService.getAddressByZipCode(zipCode,request);
+    public Result getAddressByZipCode(@PathVariable String zipCode,@RequestParam String type,HttpServletRequest request){
+        return addressService.getAddressByZipCode(zipCode,type,request);
     }
 
     @PostMapping
@@ -47,18 +47,18 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
-    public Result updateAddress(@PathVariable String id,@RequestBody Address address, HttpServletRequest request){
-        return addressService.updateAddress(id,address,request);
+    public Result updateAddress(@PathVariable String id,@RequestParam String type,@RequestBody Address address, HttpServletRequest request){
+        return addressService.updateAddress(id,type,address,request);
     }
 
     @DeleteMapping("/{id}")
-    public Result deleteAddress(@PathVariable String id, HttpServletRequest request){
-        return addressService.deleteAddress(id,request);
+    public Result deleteAddress(@PathVariable String id,@RequestParam String type, HttpServletRequest request){
+        return addressService.deleteAddress(id,type,request);
     }
 
     @GetMapping()
-    public Result getAllAddress(HttpServletRequest request){
-        return addressService.getAllAddress(request);
+    public Result getAllAddress(@RequestParam String type,HttpServletRequest request){
+        return addressService.getAllAddress(type,request);
     }
 
 

@@ -8,22 +8,22 @@ import java.util.List;
 
 public interface AddressService {
 
-    Result getAddress(String id, HttpServletRequest request);
-    Result getAddressByCity(String city, HttpServletRequest request);
+    Result getAddress(String id,String type, HttpServletRequest request);
+    Result getAddressByCity(String city,String type, HttpServletRequest request);
 
-    Result getAddressByState(String state, HttpServletRequest request);
+    Result getAddressByState(String state,String type, HttpServletRequest request);
 
-    Result getAddressByCountry(String country, HttpServletRequest request);
+    Result getAddressByCountry(String country,String type, HttpServletRequest request);
 
-    Result getAddressByZipCode(String zipCode, HttpServletRequest request);
+    Result getAddressByZipCode(String zipCode,String type, HttpServletRequest request);
 
     Result createAddress(Address address, HttpServletRequest request);
 
-    Result updateAddress(String id,Address address, HttpServletRequest request);
+    Result updateAddress(String id,String type,Address address, HttpServletRequest request);
 
-    Result deleteAddress(String id, HttpServletRequest request);
+    Result deleteAddress(String id,String type, HttpServletRequest request);
 
-    Result getAllAddress(HttpServletRequest request);
+    Result getAllAddress(String type,HttpServletRequest request);
 
     List<Address> getAddressByIdentifier(String identifier);
 }
