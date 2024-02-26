@@ -12,9 +12,6 @@ import java.util.List;
 
 @FeignClient(name = "ADDRESS-SERVICE")
 public interface AddressIntegration {
-    @PostMapping("/address")
-    Result createAddress(@RequestBody Address address);
-
     @GetMapping("/address/find")
     List<Address> getAddressByIdentifier(@RequestParam String identifier);
 }

@@ -1,10 +1,11 @@
 
+g	java:S112""FDefine and throw a dedicated exception instead of using a generic one.(ûéúÀşÿÿÿÿ8²Ù·«Ş1
 t
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(‹ËÃóÿÿÿÿÿ8äÜÎ¦Ş1
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(‹ËÃóÿÿÿÿÿ8Ë¼¶«Ş1
 n
-java:S1871'"LThis branch's code block is the same as the block for the branch on line 35.(ÒÑĞ¦üÿÿÿÿ8çÜÎ¦Ş1
+java:S1871*"LThis branch's code block is the same as the block for the branch on line 38.(ÒÑĞ¦üÿÿÿÿ8Í¼¶«Ş1
 n
-java:S1871%"LThis branch's code block is the same as the block for the branch on line 35.(Ò‡öªøÿÿÿÿ8çÜÎ¦Ş1
-L	java:S106D"+Replace this use of System.out by a logger.(ïÚïşÿÿÿÿ8ëÜÎ¦Ş1
+java:S1871("LThis branch's code block is the same as the block for the branch on line 38.(Ò‡öªøÿÿÿÿ8Í¼¶«Ş1
+L	java:S106G"+Replace this use of System.out by a logger.(ïÚïşÿÿÿÿ8Ğ¼¶«Ş1
 U
-java:S1128"3Remove this unused import 'io.jsonwebtoken.Claims'.(“œ¾ úÿÿÿÿ8ìÜÎ¦Ş1
+java:S1128"3Remove this unused import 'io.jsonwebtoken.Claims'.(“œ¾ úÿÿÿÿ8Éè¶«Ş1

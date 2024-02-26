@@ -30,6 +30,9 @@ public class AuthenticationFilter implements GatewayFilter {
                 return onError(exchange);
             }
             final String token = extractToken(request);
+            if(Boolean.TRUE.equals(jwtUtils.isTokenExpired(token))) {
+                throw new RuntimeException("Token expired");
+            }
             if (Boolean.FALSE.equals(jwtUtils.isTokenExpired(token))) {
                 if(!request.getURI().getPath().contains("/auth/logout")){
                     if (routeValidator.isSecuredForUser.test(request) && !hasRole(token, "User")) {

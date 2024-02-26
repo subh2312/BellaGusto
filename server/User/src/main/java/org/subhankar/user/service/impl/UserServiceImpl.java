@@ -1,5 +1,6 @@
 package org.subhankar.user.service.impl;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result updateUser(CreateUserRequestDTO userDTO,HttpServletRequest request) {
-        String id=jwtUtils.getIdFromToken(request.getCookies()[0].getValue());
+        String id=jwtUtils.getIdFromToken(Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found")));
 
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
@@ -96,7 +97,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result deleteUser(HttpServletRequest request, HttpServletResponse response) {
-        String id=jwtUtils.getIdFromToken(request.getCookies()[0].getValue());
+        String id=jwtUtils.getIdFromToken(Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found")));
 
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
@@ -113,8 +114,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result getUser(HttpServletRequest request) {
-        String id=jwtUtils.getIdFromToken(request.getCookies()[0].getValue());
-        System.out.println("id: "+id);
+        String token = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found"));
+        String id=jwtUtils.getIdFromToken(token);
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             throw new ResourceNotFoundException("User","id", id);

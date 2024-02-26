@@ -1,5 +1,12 @@
 
-c	java:S112¾"FDefine and throw a dedicated exception instead of using a generic one.(Æ‹ñ¡8ŒÏŒ¦Ş1
+c	java:S112¿"FDefine and throw a dedicated exception instead of using a generic one.(Æ‹ñ¡8Ö£ƒªŞ1
+h
+java:S1192L"FDefine a constant instead of duplicating this literal "token" 3 times.(…Şª®ùÿÿÿÿ8Ø£ƒªŞ1
+r
+java:S1192L"PDefine a constant instead of duplicating this literal "Token not found" 3 times.(…Şª®ùÿÿÿÿ8œŸ‡ªŞ1
 {
-java:S1192Š"XDefine a constant instead of duplicating this literal "User found successfully" 3 times.(‹åÚ¡üÿÿÿÿ8Ûë‚¦Ş1
-G	java:S106u"+Replace this use of System.out by a logger.(İŠ–é8ˆì‚¦Ş1
+java:S1192‹"XDefine a constant instead of duplicating this literal "User found successfully" 3 times.(‹åÚ¡üÿÿÿÿ8Ø£ƒªŞ1
+l
+java:S1128"ORemove this unused import 'org.springframework.beans.factory.annotation.Value'.(ìø›8…¤ƒªŞ1
+p
+java:S1128"NRemove this unused import 'org.springframework.security.crypto.bcrypt.BCrypt'.(¨úì®ÿÿÿÿÿ8†¤ƒªŞ1

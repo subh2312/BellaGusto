@@ -1,5 +1,6 @@
 package org.subhankar.address.service.impl;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.subhankar.address.model.DTO.Result;
 import org.subhankar.address.repository.AddressRepository;
 import org.subhankar.address.service.AddressService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -23,7 +25,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Result getAddress(String id,String type, HttpServletRequest request) {
-        String token = request.getCookies()[0].getValue();
+        String token = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found"));
         String userId = jwtUtil.getIdFromToken(token);
         Optional<Address> optionalAddress = addressRepository.findById(id);
         if (optionalAddress.isEmpty()){
@@ -50,7 +52,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Result getAddressByCity(String city,String type, HttpServletRequest request) {
-        String token = request.getCookies()[0].getValue();
+        String token = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found"));
         String userId = jwtUtil.getIdFromToken(token);
         List<Address> address = addressRepository.findByCity(city);
         if(!jwtUtil.hasRole(token,"Admin")&&type.equals("user")) {
@@ -69,7 +71,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Result getAddressByState(String state,String type, HttpServletRequest request) {
-        String token = request.getCookies()[0].getValue();
+        String token = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found"));
         String userId = jwtUtil.getIdFromToken(token);
         List<Address> addresses = addressRepository.findByState(state);
         if(!jwtUtil.hasRole(token,"Admin") && type.equals("user")) {
@@ -88,7 +90,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Result getAddressByCountry(String country,String type, HttpServletRequest request) {
-        String token = request.getCookies()[0].getValue();
+        String token = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found"));
         String userId = jwtUtil.getIdFromToken(token);
         List<Address> addresses = addressRepository.findByCountry(country);
         if(!jwtUtil.hasRole(token,"Admin") && type.equals("user")) {
@@ -111,7 +113,7 @@ public class AddressServiceImpl implements AddressService {
 
 
         List<Address> addresses = addressRepository.findByZipCode(zipCode);
-        String token = request.getCookies()[0].getValue();
+        String token = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found"));
         String userId = jwtUtil.getIdFromToken(token);
 
         if(!jwtUtil.hasRole(token,"Admin") && type.equals("user")){
@@ -155,7 +157,7 @@ public class AddressServiceImpl implements AddressService {
         if (optionalAddress.isEmpty()){
             throw new ResourceNotFoundException("Address", "id", id);
         }
-        String token = request.getCookies()[0].getValue();
+        String token = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found"));
         String userId = jwtUtil.getIdFromToken(token);
         if(!jwtUtil.hasRole(token,"Admin")) {
             if (!optionalAddress.get().getIdentifier().equals(userId) && type.equals("user")) {
@@ -206,7 +208,7 @@ public class AddressServiceImpl implements AddressService {
         if (optionalAddress.isEmpty()){
             throw new ResourceNotFoundException("Address", "id", id);
         }
-        String token = request.getCookies()[0].getValue();
+        String token = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found"));
         String userId = jwtUtil.getIdFromToken(token);
         if(!jwtUtil.hasRole(token,"Admin")) {
             if (!optionalAddress.get().getIdentifier().equals(userId) && type.equals("user")) {
@@ -245,7 +247,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Result getAllAddress(String type,HttpServletRequest request) {
-        String token = request.getCookies()[0].getValue();
+        String token = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("token")).map(Cookie::getValue).findFirst().orElseThrow(() -> new RuntimeException("Token not found"));
         String userId = jwtUtil.getIdFromToken(token);
         List<Address> addresses = addressRepository.findAll();
         if(!jwtUtil.hasRole(token,"Admin") && type.equals("user")) {

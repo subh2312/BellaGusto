@@ -1,21 +1,25 @@
 
 t
-java:S1192'"RDefine a constant instead of duplicating this literal "Address not found" 3 times.(º¬…‡ûÿÿÿÿ8ˆçş¨Ş1
+java:S1192)"RDefine a constant instead of duplicating this literal "Address not found" 3 times.(º¬…‡ûÿÿÿÿ8˜Ûé©Ş1
 e
-java:S1192"HDefine a constant instead of duplicating this literal "Address" 7 times.(åã‰è8‰çş¨Ş1
+java:S1192 "HDefine a constant instead of duplicating this literal "Address" 7 times.(åã‰è8˜Ûé©Ş1
 k
-java:S1192."NDefine a constant instead of duplicating this literal "Address found" 6 times.(¦Å“ó8‰çş¨Ş1
+java:S11920"NDefine a constant instead of duplicating this literal "Address found" 6 times.(¦Å“ó8˜Ûé©Ş1
 m
-java:S1192&"KDefine a constant instead of duplicating this literal "FDAAS-0002" 3 times.(ÿà’ìüÿÿÿÿ8‰çş¨Ş1
+java:S1192("KDefine a constant instead of duplicating this literal "FDAAS-0002" 3 times.(ÿà’ìüÿÿÿÿ8˜Ûé©Ş1
 c
-java:S1192""FDefine a constant instead of duplicating this literal "Admin" 8 times.(ÔÔŠá8‰çş¨Ş1
+java:S1192$"FDefine a constant instead of duplicating this literal "Admin" 8 times.(ÔÔŠá8™Ûé©Ş1
 h
-java:S1192-"KDefine a constant instead of duplicating this literal "FDAAS-0001" 9 times.(¯¹Ïº8‰çş¨Ş1
+java:S1192/"KDefine a constant instead of duplicating this literal "FDAAS-0001" 9 times.(¯¹Ïº8™Ûé©Ş1
+h
+java:S1192"FDefine a constant instead of duplicating this literal "token" 8 times.(Èô‹¬ùÿÿÿÿ8ÁÊê©Ş1
+r
+java:S1192"PDefine a constant instead of duplicating this literal "Token not found" 8 times.(Èô‹¬ùÿÿÿÿ8ØÂ‰ªŞ1
 L
-java:S1066$"/Merge this if statement with the enclosing one.(¨Òşø8Šçş¨Ş1
+java:S1066&"/Merge this if statement with the enclosing one.(¨Òşø8™Ûé©Ş1
 R
-java:S1066¡"/Merge this if statement with the enclosing one.(­”Çùÿÿÿÿ8Šçş¨Ş1
+java:S1066£"/Merge this if statement with the enclosing one.(­”Çùÿÿÿÿ8™Ûé©Ş1
 R
-java:S1066Ô"/Merge this if statement with the enclosing one.(­”Çùÿÿÿÿ8Šçş¨Ş1
-^	java:S125¨"<This block of commented-out lines of code should be removed.(«Ñ¶øÿÿÿÿ8³çş¨Ş1
-^	java:S125Û"<This block of commented-out lines of code should be removed.(«Ñ¶øÿÿÿÿ8¶çş¨Ş1
+java:S1066Ö"/Merge this if statement with the enclosing one.(­”Çùÿÿÿÿ8™Ûé©Ş1
+^	java:S125ª"<This block of commented-out lines of code should be removed.(«Ñ¶øÿÿÿÿ8¾Ûé©Ş1
+^	java:S125İ"<This block of commented-out lines of code should be removed.(«Ñ¶øÿÿÿÿ8ÁÛé©Ş1

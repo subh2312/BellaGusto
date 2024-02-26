@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 @Getter
 @Setter
@@ -24,6 +25,7 @@ public class Restaurant {
     private String openingTime;
     private String closingTime;
     private String owner;
+    private Status status;
     @Transient
     private List<String> addresses = new ArrayList<>();
     @Transient

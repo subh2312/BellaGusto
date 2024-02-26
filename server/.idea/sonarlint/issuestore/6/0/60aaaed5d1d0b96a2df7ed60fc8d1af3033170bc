@@ -1,0 +1,22 @@
+
+­
+java:S1192^"Define a constant instead of duplicating this literal "You are not authorized to create a restaurant. Please register/login as owner." 4 times.(¸Œì8îÿÄ«Ş1
+¶
+java:S1192‹"’Define a constant instead of duplicating this literal "You are not authorized to update this restaurant. Please register/login as owner." 3 times.(ÛÔí§øÿÿÿÿ8îÿÄ«Ş1
+i
+java:S1192-"LDefine a constant instead of duplicating this literal "FDAAS-0001" 16 times.(¯¹Ïº8îÿÄ«Ş1
+c
+java:S1192'"FDefine a constant instead of duplicating this literal "token" 7 times.(¡Ë¿Å8îÿÄ«Ş1
+m
+java:S1192*"PDefine a constant instead of duplicating this literal "Token not found" 7 times.(“Òùó8íÿÄ«Ş1
+m
+java:S1192#"KDefine a constant instead of duplicating this literal "Restaurant" 5 times.(¿É¹óøÿÿÿÿ8îÿÄ«Ş1
+s
+java:S1192J"QDefine a constant instead of duplicating this literal "Restaurant Owner" 5 times.(–‚¹¾ûÿÿÿÿ8îÿÄ«Ş1
+s
+java:S1192<"QDefine a constant instead of duplicating this literal "Restaurant found" 5 times.(»•¢õøÿÿÿÿ8îÿÄ«Ş1
+]	java:S1252"<This block of commented-out lines of code should be removed.(¯ñ¹¿ÿÿÿÿÿ8æµï«Ş1
+h
+java:S1128"FRemove this unused import 'org.subhankar.restaurant.model.DO.Address'.(†¯‡Áøÿÿÿÿ8õµï«Ş1
+e
+java:S1128"CRemove this unused import 'org.subhankar.restaurant.model.DO.Menu'.(¶†Úÿÿÿÿÿ8õµï«Ş1

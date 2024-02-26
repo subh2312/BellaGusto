@@ -43,8 +43,19 @@ public class AuthController {
     private final UserIntegration userIntegration;
     private final PasswordEncoder passwordEncoder;
     @PostMapping("/login")
-    public ResponseEntity<Result> login(@RequestBody LoginRequestDTO loginRequestDTO, HttpServletResponse response) {
-
+    public ResponseEntity<Result> login(@RequestBody LoginRequestDTO loginRequestDTO, HttpServletResponse response, HttpServletRequest request) {
+        if(request.getCookies() != null){
+            for(Cookie cookie: request.getCookies()){
+                if(cookie.getName().equals("token")){
+                    Result result = Result.builder()
+                            .code("200")
+                            .message("User already logged in")
+                            .data(cookie.getValue())
+                            .build();
+                    return new ResponseEntity<>(result, HttpStatus.OK);
+                }
+            }
+        }
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDTO.getEmail(), loginRequestDTO.getPassword()));
             Result Result=null;
