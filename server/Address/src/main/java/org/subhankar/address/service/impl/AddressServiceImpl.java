@@ -323,7 +323,7 @@ public class AddressServiceImpl implements AddressService {
             }
 
         }else if(jwtUtil.hasRole(token,"Restaurant Owner")){
-            if (!addressType.equals(AddressType.RESTAURANT) || !addressType.equals(AddressType.OWNER)) {
+            if (!addressType.equals(AddressType.RESTAURANT) && !addressType.equals(AddressType.OWNER)) {
                 return Result.builder()
                         .code("FDAAS-0002")
                         .message("Not authorized to delete address of this type")
