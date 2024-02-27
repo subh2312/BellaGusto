@@ -1,0 +1,17 @@
+
+h
+java:S1192)"MDefine a constant instead of duplicating this literal "Unauthorized" 3 times.(„„£œıÿÿÿÿ
+t
+java:S1128"WRemove this unused import 'org.subhankar.menuitem.exception.ResourceNotFoundException'.(Ş§”ä8¶™ÆÓŞ1
+~
+java:S1128	"\Remove this unused import 'org.subhankar.menuitem.integration.model.BasicRestaurantInfoDTO'.(÷êŠüÿÿÿÿ8¶™ÆÓŞ1
+c
+java:S1128"ARemove this unused import 'org.subhankar.menuitem.model.DO.Menu'.(©³Š—ıÿÿÿÿ8¶™ÆÓŞ1
+p
+java:S1128"NRemove this unused import 'org.subhankar.menuitem.model.DTO.CreteCategoryDTO'.(‘¢–£şÿÿÿÿ8¶™ÆÓŞ1
+m
+java:S1128"KRemove this unused import 'org.subhankar.menuitem.service.CategoryService'.(š¡°Úıÿÿÿÿ8¶™ÆÓŞ1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¶™ÆÓŞ1
+^
+java:S11448"<Remove this unused private "checkIfAuthorizedToView" method.(Ä›—¿úÿÿÿÿ8©›ÓŞ1

@@ -1,5 +1,6 @@
 package org.subhankar.menuitem.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.subhankar.menuitem.exception.ResourceNotFoundException;
@@ -12,6 +13,7 @@ import org.subhankar.menuitem.model.DTO.Result;
 import org.subhankar.menuitem.repository.CategoryRepository;
 import org.subhankar.menuitem.repository.ItemRepository;
 import org.subhankar.menuitem.repository.MenuRepository;
+import org.subhankar.menuitem.service.CategoryService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,22 +26,20 @@ public class CategoryController {
     private final MenuRepository menuRepository;
     private final ItemRepository itemRepository;
 
+    private final CategoryService categoryService;
+
     @PostMapping
-    public Result createCategory(@RequestBody CreteCategoryDTO createCategoryDTO) {
-        Menu menu = menuRepository.findById(createCategoryDTO.getMenuId()).orElseThrow(() -> new ResourceNotFoundException("Menu","id",createCategoryDTO.getMenuId()));
-        return Result.builder().code("200").message("Success").data(categoryRepository.save(Category
-                .builder()
-                .name(createCategoryDTO.getName())
-                .description(createCategoryDTO.getDescription())
-                .menu(menu)
-                .build())).build();
+    public Result createCategory(@RequestBody CreteCategoryDTO createCategoryDTO, HttpServletRequest request){
+        return categoryService.createCategory(createCategoryDTO,request);
     }
 
     @GetMapping("/{id}")
-    public Result getCategory(@PathVariable String id){
-        Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category","id",id));
-        List<Item> items = itemRepository.findByCategoryId(category.getId());
-        category.setItems(items);
-        return Result.builder().code("200").message("Success").data(category).build();
+    public Result getCategory(@PathVariable String id,HttpServletRequest request){
+        return categoryService.getCategoryById(id,request);
+    }
+
+    @GetMapping("/menu/{id}")
+    public Result getCategoriesByMenuId(@PathVariable String id,HttpServletRequest request){
+        return categoryService.getCategoriesByMenuId(id,request);
     }
 }

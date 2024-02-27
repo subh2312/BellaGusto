@@ -31,6 +31,15 @@ public class AppConfig {
                 .route("ADDRESS-SERVICE", r -> r.path("/address/**")
                         .filters(f -> f.filter(authenticationFilter))
                         .uri("lb://ADDRESS-SERVICE"))
+                .route("MENU-SERVICE", r -> r.path("/menu/**")
+                        .filters(f -> f.filter(authenticationFilter))
+                        .uri("lb://MENU-SERVICE"))
+                .route("MENU-SERVICE", r -> r.path("/category/**")
+                        .filters(f -> f.filter(authenticationFilter))
+                        .uri("lb://MENU-SERVICE"))
+                .route("MENU-SERVICE", r -> r.path("/item/**")
+                        .filters(f -> f.filter(authenticationFilter))
+                        .uri("lb://MENU-SERVICE"))
                 .build();
     }
 }

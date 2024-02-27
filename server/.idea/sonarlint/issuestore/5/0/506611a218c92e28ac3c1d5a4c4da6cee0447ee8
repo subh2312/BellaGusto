@@ -36,9 +36,9 @@ java:S1066ã"/Merge this if statement with the enclosing one.(ëò°É8ÊÎßÐÞ1
 Z
 java:S2589…"7Remove this expression which always evaluates to "true"(‚Æ‡Úøÿÿÿÿ8û”ãÐÞ1
 Z
-java:S2589¹"7Remove this expression which always evaluates to "true"(‚Æ‡Úøÿÿÿÿ8îÎßÐÞ1
-Z
 java:S2589×"7Remove this expression which always evaluates to "true"(‚Æ‡Úøÿÿÿÿ8¤¥ðÑÞ1
+Z
+java:S2589¹"7Remove this expression which always evaluates to "true"(‚Æ‡Úøÿÿÿÿ8îÎßÐÞ1
 u
 java:S3776‰"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(±Ù¥¾øÿÿÿÿ8øÎßÐÞ1
 u
