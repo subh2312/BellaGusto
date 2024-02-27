@@ -41,11 +41,12 @@ import java.util.Set;
         List<String> addressList = new ArrayList<>();
 
         @PrePersist
-        @PreUpdate
         public void prePersist() {
             this.salt = BCrypt.gensalt();
             AppConfig config = ApplicationContextProvider.getApplicationContext().getBean(AppConfig.class);
-            this.password = BCrypt.hashpw(this.password+config.getPepper(), this.salt);
+            if (this.password != null) {
+                this.password = BCrypt.hashpw(this.password + config.getPepper(), this.salt);
+            }
         }
 
     }

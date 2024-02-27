@@ -26,6 +26,11 @@ public class RestaurantController {
         return restaurantService.getRestaurantById(id, request);
     }
 
+    @GetMapping("/basic/{id}")
+    public Result getRestaurantBasicInfo(@PathVariable(name = "id")String id) throws JsonProcessingException {
+        return restaurantService.getRestaurantBasicInfo(id);
+    }
+
     @GetMapping
     public Result getAllRestaurants(HttpServletRequest request){
         return restaurantService.getAllRestaurants(request);

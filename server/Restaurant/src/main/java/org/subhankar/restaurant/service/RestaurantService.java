@@ -17,4 +17,6 @@ public interface RestaurantService {
     Result changeOwner(String id, HttpServletRequest request, String owner);
 
     Result changeStatus(String id, HttpServletRequest request, String status);
+
+    Result getRestaurantBasicInfo(String id);
 }

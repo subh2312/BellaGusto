@@ -16,3 +16,6 @@ spring:
 
 server:
   port: 9096
+
+application:
+  pepper: "ymZm9092"

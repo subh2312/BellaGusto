@@ -1,6 +1,7 @@
 package org.subhankar.authservice.config;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,8 +33,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             return null;
         }
         String salt = user.getSalt();
-        String pepper = "ymZm9092";
-        String hashedPass = BCrypt.hashpw(password + pepper, salt);
+        AppConfig config = ApplicationContextProvider.getApplicationContext().getBean(AppConfig.class);
+
+        String hashedPass = BCrypt.hashpw(password + config.getPepper(), salt);
         if (!hashedPass.equals(user.getPassword())) {
             System.out.println("Password is incorrect");
             System.out.println("Password :"+ user.getPassword());

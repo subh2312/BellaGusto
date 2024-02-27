@@ -85,7 +85,6 @@ public class UserServiceImpl implements UserService {
         updatePropertyIfNotEmpty(userDTO.getGender(), existingUser::setGender);
         updatePropertyIfNotEmpty(userDTO.getPhone(), existingUser::setPhone);
         updatePropertyIfNotEmpty(userDTO.getDob(), existingUser::setDob);
-        updatePropertyIfNotEmpty(userDTO.getPassword(), existingUser::setPassword);
         userRepository.save(existingUser);
         return Result
                 .builder()

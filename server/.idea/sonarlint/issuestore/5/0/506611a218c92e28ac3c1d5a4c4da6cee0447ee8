@@ -1,25 +1,51 @@
 
-t
-java:S1192)"RDefine a constant instead of duplicating this literal "Address not found" 3 times.(º¬…‡ûÿÿÿÿ8˜Ûé©Ş1
 e
-java:S1192 "HDefine a constant instead of duplicating this literal "Address" 7 times.(åã‰è8˜Ûé©Ş1
+java:S1192$"HDefine a constant instead of duplicating this literal "Address" 7 times.(åã‰è8ÉÎßĞŞ1
 k
-java:S11920"NDefine a constant instead of duplicating this literal "Address found" 6 times.(¦Å“ó8˜Ûé©Ş1
-m
-java:S1192("KDefine a constant instead of duplicating this literal "FDAAS-0002" 3 times.(ÿà’ìüÿÿÿÿ8˜Ûé©Ş1
-c
-java:S1192$"FDefine a constant instead of duplicating this literal "Admin" 8 times.(ÔÔŠá8™Ûé©Ş1
-h
-java:S1192/"KDefine a constant instead of duplicating this literal "FDAAS-0001" 9 times.(¯¹Ïº8™Ûé©Ş1
-h
-java:S1192"FDefine a constant instead of duplicating this literal "token" 8 times.(Èô‹¬ùÿÿÿÿ8ÁÊê©Ş1
+java:S1192@"NDefine a constant instead of duplicating this literal "Address found" 9 times.(¦Å“ó8ÉÎßĞŞ1
+n
+java:S1192,"LDefine a constant instead of duplicating this literal "FDAAS-0002" 20 times.(ÿà’ìüÿÿÿÿ8ÉÎßĞŞ1
+i
+java:S1192?"LDefine a constant instead of duplicating this literal "FDAAS-0001" 12 times.(¯¹Ïº8ÉÎßĞŞ1
+‘
+java:S1192ç"nDefine a constant instead of duplicating this literal "Not authorized to update address of this type" 3 times.(ŞÅğâùÿÿÿÿ8ÉÎßĞŞ1
 r
-java:S1192"PDefine a constant instead of duplicating this literal "Token not found" 8 times.(Èô‹¬ùÿÿÿÿ8ØÂ‰ªŞ1
+java:S1192 "PDefine a constant instead of duplicating this literal "Token not found" 5 times.(Èô‹¬ùÿÿÿÿ8ÉÎßĞŞ1
+n
+java:S11922"QDefine a constant instead of duplicating this literal "Restaurant Owner" 5 times.(™ñš8ÉÎßĞŞ1
+c
+java:S11925"FDefine a constant instead of duplicating this literal "owner" 5 times.(¶á¯ı8ÉÎßĞŞ1
+h
+java:S1192 "FDefine a constant instead of duplicating this literal "token" 5 times.(Èô‹¬ùÿÿÿÿ8ÊÎßĞŞ1
+‹
+java:S1192š"nDefine a constant instead of duplicating this literal "Not authorized to create address of this type" 4 times.(³×Á"8ÊÎßĞŞ1
+t
+java:S1192Æ"QDefine a constant instead of duplicating this literal "Delivery Partner" 4 times.(´ÄŠõúÿÿÿÿ8ÊÎßĞŞ1
 L
-java:S1066&"/Merge this if statement with the enclosing one.(¨Òşø8™Ûé©Ş1
+java:S1066*"/Merge this if statement with the enclosing one.(ÿ‹ƒ…8ÊÎßĞŞ1
 R
-java:S1066£"/Merge this if statement with the enclosing one.(­”Çùÿÿÿÿ8™Ûé©Ş1
+java:S1066º"/Merge this if statement with the enclosing one.(µ¥œ¬ÿÿÿÿÿ8ÊÎßĞŞ1
 R
-java:S1066Ö"/Merge this if statement with the enclosing one.(­”Çùÿÿÿÿ8™Ûé©Ş1
-^	java:S125ª"<This block of commented-out lines of code should be removed.(«Ñ¶øÿÿÿÿ8¾Ûé©Ş1
-^	java:S125İ"<This block of commented-out lines of code should be removed.(«Ñ¶øÿÿÿÿ8ÁÛé©Ş1
+java:S1066†"/Merge this if statement with the enclosing one.(Ù®ºÿùÿÿÿÿ8ÊÎßĞŞ1
+M
+java:S1066‘"/Merge this if statement with the enclosing one.(ëò°É8ÊÎßĞŞ1
+R
+java:S1066Ø"/Merge this if statement with the enclosing one.(µ¥œ¬ÿÿÿÿÿ8ÊÎßĞŞ1
+M
+java:S1066ã"/Merge this if statement with the enclosing one.(ëò°É8ÊÎßĞŞ1
+Z
+java:S2589¹"7Remove this expression which always evaluates to "true"(‚Æ‡Úøÿÿÿÿ8îÎßĞŞ1
+Z
+java:S2589…"7Remove this expression which always evaluates to "true"(‚Æ‡Úøÿÿÿÿ8û”ãĞŞ1
+a
+java:S2583Ì"CChange this condition so that it does not always evaluate to "true"(ıä®¥8îÎßĞŞ1
+u
+java:S3776‰"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(±Ù¥¾øÿÿÿÿ8øÎßĞŞ1
+u
+java:S3776Ú"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(øÒ¶°úÿÿÿÿ8ıÎßĞŞ1
+u
+java:S3776¬"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(Ÿÿÿëùÿÿÿÿ8ÏßĞŞ1
+x
+java:S1128	"[Remove this unused import 'org.subhankar.address.integration.model.BasicRestaurantInfoDTO'.(·ãÏ§8ŠÏßĞŞ1
+è
+java:S6541‰"ÄA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 76 to 64, Complexity from 15 to 14, Nesting Level from 3 to 2, Number of Variables from 8 to 6.(±Ù¥¾øÿÿÿÿ8ÏßĞŞ1

@@ -3,9 +3,9 @@ g	java:S112""FDefine and throw a dedicated exception instead of using a generi
 t
 java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(‹ËÃóÿÿÿÿÿ8Ë¼¶«Þ1
 n
-java:S1871*"LThis branch's code block is the same as the block for the branch on line 38.(ÒÑÐ¦üÿÿÿÿ8Í¼¶«Þ1
-n
 java:S1871("LThis branch's code block is the same as the block for the branch on line 38.(Ò‡öªøÿÿÿÿ8Í¼¶«Þ1
+n
+java:S1871*"LThis branch's code block is the same as the block for the branch on line 38.(ÒÑÐ¦üÿÿÿÿ8Í¼¶«Þ1
 L	java:S106G"+Replace this use of System.out by a logger.(ïŽÚïþÿÿÿÿ8Ð¼¶«Þ1
 U
 java:S1128"3Remove this unused import 'io.jsonwebtoken.Claims'.(“œ¾ úÿÿÿÿ8Éè¶«Þ1

@@ -23,4 +23,8 @@ public class Address {
         private String zipCode;
         private String identifier;
         private String tag;
+        @Enumerated(EnumType.STRING)
+        private AddressType type;
+        @Enumerated(EnumType.STRING)
+        private Status status;
 }

@@ -13,6 +13,7 @@ import org.subhankar.restaurant.model.DO.Address;
 import org.subhankar.restaurant.model.DO.Menu;
 import org.subhankar.restaurant.model.DO.Restaurant;
 import org.subhankar.restaurant.model.DO.Status;
+import org.subhankar.restaurant.model.DTO.BasicRestaurantInfoDTO;
 import org.subhankar.restaurant.model.DTO.Result;
 import org.subhankar.restaurant.repository.RestaurantRepository;
 import org.subhankar.restaurant.service.RestaurantService;
@@ -49,12 +50,12 @@ public class RestaurantServiceImpl implements RestaurantService {
             }
 //            Menu menu = menuService.getMenu(id);
 //            restaurant.setMenu(menu);
-//            List<Address> addresses = addressIntegration.getAddressByIdentifier(id);
-//            List<String> addressIds = new ArrayList<>();
-//            for(Address address: addresses){
-//                addressIds.add(address.getId());
-//            }
-//            restaurant.setAddresses(addressIds);
+            List<Address> addresses = addressIntegration.getAddressByIdentifier(id);
+            List<String> addressIds = new ArrayList<>();
+            for(Address address: addresses){
+                addressIds.add(address.getId());
+            }
+            restaurant.setAddresses(addressIds);
             return Result.builder()
                     .code("FDAAS-0001")
                     .message("Restaurant found")
@@ -71,12 +72,16 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .orElseThrow(() -> new RuntimeException("Token not found"));
         String owner = jwtUtil.getIdFromToken(token);
         List<Restaurant> restaurants = restaurantRepository.findAll();
+
         if(jwtUtil.hasRole(token, "Restaurant Owner")){
             restaurants.removeIf(restaurant -> !restaurant.getOwner().equals(owner));
         }
+        if(!jwtUtil.hasRole(token, "Admin") && !jwtUtil.hasRole(token, "Restaurant Owner")){
+            restaurants.removeIf(restaurant -> !restaurant.getStatus().equals(Status.ACTIVE));
+        }
         return Result.builder()
                 .code("FDAAS-0001")
-                .message("Restaurants found")
+                .message("Restaurant found")
                 .data(restaurants)
                 .build();
     }
@@ -246,6 +251,29 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .code("FDAAS-0001")
                 .message("Restaurant found")
                 .data(restaurantRepository.save(restaurant))
+                .build();
+    }
+
+    @Override
+    public Result getRestaurantBasicInfo(String id) {
+        Optional<Restaurant> optional = restaurantRepository.findById(id);
+        if (optional.isEmpty()){
+            return Result.builder()
+                    .code("FDAAS-0001")
+                    .message("Restaurant Not Found")
+                    .data(null)
+                    .build();
+        }
+        Restaurant restaurant = optional.get();
+        return Result.builder()
+                .code("FDAAS-0001")
+                .message("Restaurant found")
+                .data(BasicRestaurantInfoDTO.builder()
+                        .name(restaurant.getName())
+                        .id(restaurant.getId())
+                        .owner(restaurant.getOwner())
+                        .status(restaurant.getStatus().toString())
+                        .build())
                 .build();
     }
 

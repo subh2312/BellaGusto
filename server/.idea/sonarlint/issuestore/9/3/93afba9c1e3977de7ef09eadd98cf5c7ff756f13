@@ -1,0 +1,24 @@
+
+\
+java:S1128":Remove this unused import 'jakarta.persistence.Transient'.(ÂÛÿØıÿÿÿÿ8²§ÆŞ1
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8³§ÆŞ1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8³§ÆŞ1
+C
+java:S1068	"&Remove this unused "id" private field.(æ¨ç†8¡úŠÆŞ1
+E
+java:S1068
+"(Remove this unused "name" private field.(Ë¥¼8¢úŠÆŞ1
+Q
+java:S1068"/Remove this unused "description" private field.(ÇÓæâıÿÿÿÿ8¢úŠÆŞ1
+F
+java:S1068")Remove this unused "phone" private field.(À†½´8¢úŠÆŞ1
+J
+java:S1068"(Remove this unused "logo" private field.(‹‘İşÿÿÿÿ8¢úŠÆŞ1
+L
+java:S1068"/Remove this unused "openingTime" private field.(ÚÂ‚â8£úŠÆŞ1
+Q
+java:S1068"/Remove this unused "closingTime" private field.(şù©âøÿÿÿÿ8£úŠÆŞ1
+F
+java:S1068")Remove this unused "owner" private field.(¿˜‰á8£úŠÆŞ1
